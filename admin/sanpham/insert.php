@@ -63,25 +63,26 @@ if (isset($_GET['masp'])) {
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 					<ul class="nav nav-tabs">
-					<li class="nav-item">
-						<a class="nav-link active" href="#">Quản lý phim</a>
-					</li>
-					<li class="nav-item">
-							<a class="nav-link" href="../sanpham/">Quản lý lịch chiếu</a>
+					<ul class="nav nav-tabs">
+						<li class="nav-item">
+							<a class="nav-link " href="../phim/">Quản lý phim</a>
 						</li>
-					<li class="nav-item">
-						<a class="nav-link" href="../product/">Quản lý sản phẩm</a>
-					</li>
-					
-					<li class="nav-item">
-						<a class="nav-link" href="../product/">Quản lý khuyến mãi</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="../product/">Quản lý nhân viên</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="../product/">Quản lý thành viên</a>
-					</li>
+						<li class="nav-item">
+							<a class="nav-link" href="../lichchieu/">Quản lý lịch chiếu</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" href="#">Quản lý sản phẩm</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="../khuyenmai/">Quản lý khuyến mãi</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="../nhanvien/">Quản lý nhân viên</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="../thanhvien/">Quản lý thành viên</a>
+						</li>
+					</ul>
 					</ul>
 					</div>
             </div>

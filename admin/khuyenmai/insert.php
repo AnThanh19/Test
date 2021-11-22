@@ -1,39 +1,32 @@
 <?php
 require_once ('../../db/dbhelper.php');
 
-$masp = $tensp = '';
-
-if (isset($_GET['masp'])) {
-	$masp   = $_GET['masp'];
-	$sql          = "select * from sanpham where masp='$masp'";
-	$result = executeSingleResult($sql);
-	
-	if ($result != null) {
-		$tensp = $result[1];
-		$gia= $result[2];
-		
-	}
-
-}
+$makm =$ngaybatdau='';
 if (!empty($_POST)) {
-	if (isset($_POST['tensp'])) {
-		$tensp = $_POST['tensp'];
-		$gia = $_POST['gia'];
-		
+	if (isset($_POST['ngaybatdau'])) {
+		$ngaybatdau = $_POST['ngaybatdau'];
+		$ngayketthuc = $_POST['ngayketthuc'];
+		$phantram= $_POST['phantram'];
+	
 	}
-	if (isset($_POST['masp'])) {
-		$masp = $_POST['masp'];
+	if (isset($_POST['makm'])) {
+		$makm = $_POST['makm'];
 	}
+	
 
-	if (!empty($tensp)) {
-		$sql = "UPDATE `sanpham` SET `TENSP`='$tensp',`GIA`='$gia' WHERE `MASP`='$masp'";
-		
+	if (!empty($ngaybatdau)) {
+		//Luu vao database
+		if ($makm == '') {
+			$sql = 'insert into khuyenmai(`NGAYBATDAU`, `NGAYKETTHUC`, `PHANTRAM`) 
+				values ("'.$ngaybatdau.'","'.$ngayketthuc.'","'.$phantram.'")';
+		} 
         execute($sql);
 
 		header('Location: index.php');
 		die();
 	}
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +34,7 @@ if (!empty($_POST)) {
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Sửa sản phẩm</title>
+	<title>Thêm Khuyến mãi</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
@@ -65,18 +58,17 @@ if (!empty($_POST)) {
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 					<ul class="nav nav-tabs">
-					<ul class="nav nav-tabs">
-						<li class="nav-item">
+					<li class="nav-item">
 							<a class="nav-link " href="../phim/">Quản lý phim</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="../lichchieu/">Quản lý lịch chiếu</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" href="#">Quản lý sản phẩm</a>
+							<a class="nav-link" href="../sanpham/">Quản lý sản phẩm</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="../khuyenmai/">Quản lý khuyến mãi</a>
+							<a class="nav-link active" href="#">Quản lý khuyến mãi</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="../nhanvien/">Quản lý nhân viên</a>
@@ -85,26 +77,28 @@ if (!empty($_POST)) {
 							<a class="nav-link" href="../thanhvien/">Quản lý thành viên</a>
 						</li>
 					</ul>
-					</ul>
 				</div>
-            </div>
-        </nav>
-    </header>
+			</div>
+		</nav>
+	</header>
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h2 class="text-center">Sửa sản phẩm</h2>
+				<h2 class="text-center">Thêm khuyến mãi</h2>
 			</div>
 			<div class="panel-body">
 				<form method="post">
 					<div class="form-group">
-					  <label for="name">Tên sản phẩm:</label>
-					  <input required="true" type="text" class="form-control" id="tensp" name="tensp" value="<?=$tensp?>">
-					  
+					  <label for="name">Ngày bắt đầu:</label>
+					  <input required="true" type="datetime-local" class="form-control" id="ngaybatdau" name="ngaybatdau" >
 					</div>
 					<div class="form-group">
-					  <label for="thoiluong">Giá:</label>
-					  <input required="true" type="text" class="form-control" id="gia" name="gia" value="<?=$gia?>">
+					  <label for="name">Ngày kết thúc:</label>
+					  <input required="true" type="datetime-local" class="form-control" id="ngayketthuc" name="ngayketthuc" >
+					</div>
+					<div class="form-group">
+					  <label for="thoiluong">Phần trăm:</label>
+					  <input required="true" type="number" min="0" max="50" step ="5" class="form-control" id="phantram" name="phantram" >
 					</div>
 					
 					<button class="btn btn-success">Lưu</button>

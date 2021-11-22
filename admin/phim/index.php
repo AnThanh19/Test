@@ -35,19 +35,19 @@ require_once ('../../db/dbhelper.php');
 							<a class="nav-link active" href="#">Quản lý phim</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="../sanpham/">Quản lý lịch chiếu</a>
+							<a class="nav-link" href="../lichchieu/">Quản lý lịch chiếu</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="../sanpham/">Quản lý sản phẩm</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="../product/">Quản lý khuyến mãi</a>
+							<a class="nav-link" href="../khuyenmai/">Quản lý khuyến mãi</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="../product/">Quản lý nhân viên</a>
+							<a class="nav-link" href="../nhanvien/">Quản lý nhân viên</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="../product/">Quản lý thành viên</a>
+							<a class="nav-link" href="../thanhvien/">Quản lý thành viên</a>
 						</li>
 					</ul>
 				</div>

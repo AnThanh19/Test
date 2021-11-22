@@ -1,39 +1,5 @@
 <?php
 require_once ('../../db/dbhelper.php');
-
-$masp = $tensp = '';
-
-if (isset($_GET['masp'])) {
-	$masp   = $_GET['masp'];
-	$sql          = "select * from sanpham where masp='$masp'";
-	$result = executeSingleResult($sql);
-	
-	if ($result != null) {
-		$tensp = $result[1];
-		$gia= $result[2];
-		
-	}
-
-}
-if (!empty($_POST)) {
-	if (isset($_POST['tensp'])) {
-		$tensp = $_POST['tensp'];
-		$gia = $_POST['gia'];
-		
-	}
-	if (isset($_POST['masp'])) {
-		$masp = $_POST['masp'];
-	}
-
-	if (!empty($tensp)) {
-		$sql = "UPDATE `sanpham` SET `TENSP`='$tensp',`GIA`='$gia' WHERE `MASP`='$masp'";
-		
-        execute($sql);
-
-		header('Location: index.php');
-		die();
-	}
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +7,7 @@ if (!empty($_POST)) {
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Sửa sản phẩm</title>
+	<title>Admin</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
@@ -55,7 +21,7 @@ if (!empty($_POST)) {
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<header>
+	<header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ADMIN</a>
@@ -65,7 +31,6 @@ if (!empty($_POST)) {
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 					<ul class="nav nav-tabs">
-					<ul class="nav nav-tabs">
 						<li class="nav-item">
 							<a class="nav-link " href="../phim/">Quản lý phim</a>
 						</li>
@@ -73,18 +38,17 @@ if (!empty($_POST)) {
 							<a class="nav-link" href="../lichchieu/">Quản lý lịch chiếu</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" href="#">Quản lý sản phẩm</a>
+							<a class="nav-link" href="../sanpham/">Quản lý sản phẩm</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="../khuyenmai/">Quản lý khuyến mãi</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="../nhanvien/">Quản lý nhân viên</a>
+							<a class="nav-link " href="../nhanvien/">Quản lý nhân viên</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="../thanhvien/">Quản lý thành viên</a>
+							<a class="nav-link active" href="#">Quản lý thành viên</a>
 						</li>
-					</ul>
 					</ul>
 				</div>
             </div>
@@ -93,24 +57,81 @@ if (!empty($_POST)) {
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h2 class="text-center">Sửa sản phẩm</h2>
+				<h2 class="text-center">Danh sách thành viên</h2>
 			</div>
 			<div class="panel-body">
-				<form method="post">
-					<div class="form-group">
-					  <label for="name">Tên sản phẩm:</label>
-					  <input required="true" type="text" class="form-control" id="tensp" name="tensp" value="<?=$tensp?>">
-					  
-					</div>
-					<div class="form-group">
-					  <label for="thoiluong">Giá:</label>
-					  <input required="true" type="text" class="form-control" id="gia" name="gia" value="<?=$gia?>">
-					</div>
+				<a href="insert.php">
+					<button class="btn btn-success" style="margin-bottom: 15px;">Thêm thành viên</button>
+				</a>
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th width="50px">Mã thành viên</th>
+							<th>Tên thành viên</th>
+							<th>Giới tính</th>
+							<th>Ngày sinh</th>
+							<th>Địa chỉ</th>
+							<th>SĐT</th>
+							<th>CCCD</th>
+							<th>Ngày đăng ký</th>
+							<th>Điểm tích lũy</th>
+							<th>Loại tài khoản</th>
+							<th>Email</th>
+							<th width="50px"></th>
+							<th width="50px"></th>
+						</tr>
+					</thead>
+					<tbody>
+<?php
+//Lay danh sach danh muc tu database
+$sql          = "select * from thanhvien";
+$result = executeResult($sql);
+foreach ($result as $row) 
+{
+	echo "<tr>
+				<td>$row[0]</td>
+				<td>$row[1]</td>
+				<td>$row[2]</td>
+				<td>$row[3]</td>
+				<td>$row[4]</td>
+				<td>$row[5]</td>
+				<td>$row[6]</td>
+				<td>$row[7]</td>
+				<td>$row[8]</td>
+				<td>$row[9]</td>
+				<td>$row[10]</td>
+				<td>
+					<a href='update.php?matv=$row[0]'><button class='btn btn-warning'>Sửa</button></a>
+				</td>
+				<td>
+					<button class='btn btn-danger' onclick='deleteCategory($row[0])'>Xoá</button>
+				</td>
+		</tr>";
 					
-					<button class="btn btn-success">Lưu</button>
-				</form>
+}
+?>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+		function deleteCategory(matv) {
+			var option = confirm('Bạn có chắc chắn muốn xoá thành viên này không?')
+			if(!option) {
+				return;
+			}
+
+			console.log(matv)
+			//ajax - lenh post
+			$.post('ajax.php', {
+				'matv': matv,
+				'action': 'delete'
+			}, function(data) {
+				location.reload()
+			})
+		}
+	</script>
 </body>
 </html>

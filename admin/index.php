@@ -29,13 +29,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 					<ul class="nav nav-tabs">
 						<li class="nav-item">
-							<a class="nav-link " href="../phim/">Quản lý phim</a>
+							<a class="nav-link " href="../admin/phim/">Quản lý phim</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="../sanpham/">Quản lý lịch chiếu</a>
+							<a class="nav-link" href="../admin/lichchieu/">Quản lý lịch chiếu</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link " href="../sanpham/">Quản lý sản phẩm</a>
+							<a class="nav-link " href="../admin/sanpham/">Quản lý sản phẩm</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="../product/">Quản lý khuyến mãi</a>
